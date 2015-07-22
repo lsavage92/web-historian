@@ -25,21 +25,19 @@ exports.initialize = function(pathsObj){
 // The following function names are provided to you to suggest how you might
 // modularize your code. Keep it clean!
 
+//Figure out how to rescope
+//No no touchy ;)
+var _list;
 exports.readListOfUrls = function(){
-    //pull sites.txt
   fs.readFile(exports.paths['list'], 'utf8', function(err, data){
     if(err) throw err;
-    //parse to get obj
-    console.log("This is data: ", data);
-    //print out all URLS (keys)
-    var arr = data.split("\n");
-    console.log("Split data: ", arr);
-    return arr;
+    _list = data.split("\n");
   });
 };
 
 exports.isUrlInList = function(url){
-
+  exports.readListOfUrls();
+  return _.contains(_list, url);
 };
 
 exports.addUrlToList = function(){

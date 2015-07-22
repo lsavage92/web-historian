@@ -5,3 +5,7 @@ var archive = require('../helpers/archive-helpers');
 exports.read = function(){
   archive.readListOfUrls();
 }
+
+exports.checkUrl = function(url){
+  return archive.isUrlInList(url);
+}
