@@ -13,7 +13,9 @@ exports.paths = {
   'siteAssets' : path.join(__dirname, '../web/public'),
   'archivedSites' : path.join(__dirname, '../archives/sites'),
   'list' : path.join(__dirname, '../archives/sites.txt'),
-  'index' : path.join(__dirname, '../web/public/index.html')
+  'index' : path.join(__dirname, '../web/public/index.html'),
+  'css' : path.join(__dirname, '../web/public/styles.css'),
+  'loading' : path.join(__dirname, '../web/public/loading.html')
 };
 
 // Used for stubbing paths for jasmine tests, do not modify
@@ -35,7 +37,6 @@ exports.readListOfUrls = function(){
       console.log(err);
     }
     _list = data.split("\n");
-    console.log(_list);
   });
 };
 

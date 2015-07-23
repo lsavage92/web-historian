@@ -12,9 +12,26 @@ exports.handleRequest = function (req, res) {
   if(req.method === 'GET' && req.url === '/'){
     res.writeHead(200, httpHelp.headers);
     httpHelp.serveAssets(res, archive.paths['index'], function(err, data){
-      res.end(data);
+      httpHelp.headers['Content-Type'] = 'text/html';
+      res.write(data);
+      res.end();
     });
   }
+  if (req.method === 'GET' && req.url === '/styles.css'){
+    httpHelp.serveAssets(res, archive.paths['css'], function(err, data){ // Refactor GET request to be more DRY
+      httpHelp.headers['Content-Type'] = 'text/css';
+      res.write(data);
+      res.end();
+    });
+  }
+  if (req.method === 'GET' && req.url === '/loading.html'){
+    httpHelp.serveAssets(res, archive.paths['loading'], function(err, data){
+      httpHelp.headers['Content-Type'] = 'text/html';
+      res.write(data);
+      res.end();
+    });
+  }
+
   //is it archived already?
     //Give the page
   //else
