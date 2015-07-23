@@ -30,17 +30,33 @@ exports.initialize = function(pathsObj){
 var _list;
 exports.readListOfUrls = function(){
   fs.readFile(exports.paths['list'], 'utf8', function(err, data){
-    if(err) throw err;
+    if(err){
+      console.log(err);
+    }
     _list = data.split("\n");
+    console.log(_list);
   });
 };
 
 exports.isUrlInList = function(url){
-  exports.readListOfUrls();
   return _.contains(_list, url);
 };
 
-exports.addUrlToList = function(){
+exports.addUrlToList = function(url){
+
+  if (!_list){
+    exports.readListOfUrls();
+  }
+  if(!exports.isUrlInList(url)){
+    url = "\n" + url;
+    fs.appendFile(exports.paths['list'], url, 'utf8', function(err){
+      if(err){
+        console.log(err);
+      }
+      exports.readListOfUrls();
+    });
+  }
+
 };
 
 exports.isURLArchived = function(){
