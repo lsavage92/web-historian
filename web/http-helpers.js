@@ -16,6 +16,16 @@ exports.serveAssets = function(res, asset, callback) {
   fs.readFile(asset, 'utf8', callback);
 };
 
+exports.serveArchive = function(){};
+
+exports.serveCb = function(err, data, res, type){
+  //httpHelp.serveAssets(res, archive.paths['index'], function(err, data){
+    exports.headers['Content-Type'] = type;
+    res.writeHead(200, exports.headers);
+    res.write(data);
+    res.end();
+  //});
+}
 
 
 // As you progress, keep thinking about what helper functions you can put here!

@@ -30,18 +30,27 @@ exports.initialize = function(pathsObj){
 
 //Figure out how to rescope
 //No no touchy ;)
-var _list;
+var _list = {'/www.google.com': true};
 exports.readListOfUrls = function(){
   fs.readFile(exports.paths['list'], 'utf8', function(err, data){
     if(err){
       console.log(err);
     }
-    _list = data.split("\n");
+    var tempArray = data.split("\n");
+    _.each(tempArray, function(item){
+      _list[item] = false;
+    });
   });
 };
 
 exports.isUrlInList = function(url){
-  return _.contains(_list, url);
+  var isTrue = false;
+  for (var key in _list){
+    if (key === url){
+      isTrue = true;
+    }
+  }
+  return isTrue;
 };
 
 exports.addUrlToList = function(url){
@@ -61,8 +70,13 @@ exports.addUrlToList = function(url){
 
 };
 
-exports.isURLArchived = function(){
+//Web app cares about this.
+exports.isUrlArchived = function(url, callback){
+  fs.exists(exports.paths['archivedSites'] + url, function(exists){
+    console.log(exports.paths['archivedSites'] + url);
+    callback(exists);
+  });
 };
-
+//Worker app cares about this.
 exports.downloadUrls = function(){
 };
