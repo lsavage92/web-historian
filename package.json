@@ -6,6 +6,8 @@
   "license": "Copyright 2014, Hack Reactor. All rights reserved.",
   "dependencies": {
     "fs": "0.0.2",
+    "http-get": "^0.5.10",
+    "http-request": "^0.7.0",
     "mocha": "^2.2.5"
   },
   "devDependencies": {
