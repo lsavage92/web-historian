@@ -1,6 +1,7 @@
 var fs = require('fs');
 var path = require('path');
 var _ = require('underscore');
+var httpRequest = require('http-request');
 
 /*
  * You will need to reuse the same paths many times over in the course of this sprint.
@@ -78,5 +79,10 @@ exports.isUrlArchived = function(url, callback){
   });
 };
 //Worker app cares about this.
-exports.downloadUrls = function(){
+exports.downloadUrls = function(url){
+  httpRequest.get(url, exports.paths['archivedSites'] + '/' + url, function(err, res){
+    if(err) {
+      console.log(err);
+    }
+  });
 };

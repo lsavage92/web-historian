@@ -25,7 +25,21 @@ exports.serveCb = function(err, data, res, type){
     res.write(data);
     res.end();
   //});
+};
+
+exports.sendResponse = function(res, loc, status){
+  status = status || 302;
+  res.writeHead(status, {Location: loc});
+  res.end();
+};
+
+exports.collectData = function(req, callback){
+  var data = '';
+  req.on('data', function(frame){
+    data += frame;
+  });
+  req.on('end', function(){
+    callback(data);
+  });
 }
-
-
 // As you progress, keep thinking about what helper functions you can put here!
