@@ -54,6 +54,7 @@ exports.handleRequest = function (req, res) {
         //If not in sites, put it in sites
         writer.addUrl(url);
         httpHelp.sendResponse(res, '/loading.html');
+        archive.downloadUrls(url);
       }
     });
   }

@@ -79,5 +79,10 @@ exports.isUrlArchived = function(url, callback){
   });
 };
 //Worker app cares about this.
-exports.downloadUrls = function(){
+exports.downloadUrls = function(url){
+  httpRequest.get(url, exports.paths['archivedSites'] + '/' + url, function(err, res){
+    if(err) {
+      console.log(err);
+    }
+  });
 };
